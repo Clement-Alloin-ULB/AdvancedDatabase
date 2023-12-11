@@ -1,0 +1,48 @@
+keyspace: stress_test
+
+# The CQL for creating a keyspace (optional if it already exists)
+keyspace_definition: |
+  CREATE KEYSPACE stress_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+# Table name
+table: ratings
+ 
+# The CQL for creating a table you wish to stress (optional if it already exists)
+table_definition: 
+  CREATE TABLE IF NOT EXISTS ratings (
+  rating_id int,
+  user_id int,
+  rating double,
+  timestamp timestamp,
+  movie_id int,
+  title text,
+  genre_id int,
+  genre_name text,
+  PRIMARY KEY (rating_id))
+### Column Distribution Specifications ###
+ 
+columnspec:
+
+  - name: rating
+    size: gaussian(0..5)
+    population: gaussian(0..5)
+
+
+
+### Batch Ratio Distribution Specifications ###
+
+insert:
+  partitions: fixed(1)            # Our partition key is the domain so only insert one per batch
+ 
+  select:  fixed(1)/1000        # We have 1000 posts per domain so 1/1000 will allow 1 post per batch  
+ 
+  batchtype: UNLOGGED             # Unlogged batches
+
+
+#
+# A list of queries you wish to run against the schema
+#
+queries:
+   read_user: 
+    cql: SELECT * FROM ratings WHERE rating_id = ?;
+    fields: samerow
