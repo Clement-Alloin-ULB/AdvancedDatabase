@@ -8,9 +8,9 @@ Authors : Alloin Clément 573143 ,Fernandes do Rosario Tiago 502627 , Laravine N
 
 ### Run Cassandra
 
-Cassandra **3.11.16** (latest version working on Windows) (https://cassandra.apache.org/_/download.html)
-with Python **2.7** (https://www.python.org/downloads/release/python-2718/)
-and JDK **8**  (https://www.oracle.com/java/technologies/downloads/#java8)
+Cassandra **3.11.16** (latest version working on Windows) (https://cassandra.apache.org/_/download.html)  
+with Python **2.7** (https://www.python.org/downloads/release/python-2718/)  
+and JDK **8**  (https://www.oracle.com/java/technologies/downloads/#java8)  
 
 ```bash
 #Launch Cassandra
@@ -49,8 +49,9 @@ Truncate ratings ;
 
 #### Select
 
-To populate the database with real data to do the select we need the data.csv.
-The file contains 25 millions rows and is quite large. (1.7G)
+To populate the database with real data to do the select we need the data.csv.  
+We used A csv containing 25M rows to populate the cassandra database but it is too big to upload it on gitHub.  
+We only included one with 250k rows .  
 
 ```bash
 #In cqlsh
@@ -59,6 +60,7 @@ copy stress_test.ratings (rating_id,user_id,movie_id,rating,timestamp,title,genr
 #250K Rows
 copy stress_test.ratings (rating_id,user_id,movie_id,rating,timestamp,title,genre_id,genre_name) from './data.csv' WITH HEADER = TRUE AND MAXROWS=250000; 
 #25M Rows
+#File for this one not one github
 copy stress_test.ratings (rating_id,user_id,movie_id,rating,timestamp,title,genre_id,genre_name) from './data.csv' WITH HEADER = TRUE; 
 ```
 
@@ -76,10 +78,7 @@ SELECT avg(rating) from ratings where genre_name = 'Comedy' ALLOW FILTERING;
 
 #### Update
 
-Didn't do dothis query.
-Cassandra isn't intened to do large numbers of updates.
-Cassandra requires the primary key of the row when doing an update.
-Didn't find a way to do batch update with this constraints.
+ / (Explained in the repport)
 
 
 ## HBase # AdvancedDatabase
