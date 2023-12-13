@@ -50,7 +50,7 @@ Truncate ratings ;
 #### Select
 
 To populate the database with real data to do the select we need the data.csv.  
-We used A csv containing 25M rows to populate the cassandra database but it is too big to upload it on gitHub.  
+We used a csv containing 25M rows to populate the cassandra database but it is too big to upload it on gitHub.  
 We only included one with 250k rows .  
 
 ```bash
@@ -60,7 +60,7 @@ copy stress_test.ratings (rating_id,user_id,movie_id,rating,timestamp,title,genr
 #250K Rows
 copy stress_test.ratings (rating_id,user_id,movie_id,rating,timestamp,title,genre_id,genre_name) from './data.csv' WITH HEADER = TRUE AND MAXROWS=250000; 
 #25M Rows
-#File for this one not one github
+#File for this one not on github
 copy stress_test.ratings (rating_id,user_id,movie_id,rating,timestamp,title,genre_id,genre_name) from './data.csv' WITH HEADER = TRUE; 
 ```
 
@@ -81,4 +81,4 @@ SELECT avg(rating) from ratings where genre_name = 'Comedy' ALLOW FILTERING;
  / (Explained in the repport)
 
 
-## HBase # AdvancedDatabase
+## HBase
