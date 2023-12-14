@@ -4,6 +4,15 @@ Authors : Alloin Clément 573143 ,Fernandes do Rosario Tiago 502627 , Laravine N
 
 ## PostgreSQL 
 
+To create the database with the 250k rowsyou need to use :  
+    - the "Relationel_250k" for the relationell postgresql  
+    - the "Join_250k" for the postgresql column  
+
+You can use pgAdmin to recreate the database , by creating a new database, then using the "restore" option and selecting the right file.  
+
+All the other queries use for postgresql are in file "Adv_proj.zip"  
+
+
 ## Cassandra 
 
 ### Run Cassandra
